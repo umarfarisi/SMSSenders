@@ -14,6 +14,7 @@ import learn.com.smssender.model.Sender;
 public class SenderViewHolder extends RecyclerView.ViewHolder {
 
     private TextView senderNameTextView;
+    private TextView senderNumberTextView;
     private TextView senderNumberOfSendingTextView;
 
     public SenderViewHolder(View itemView) {
@@ -23,11 +24,13 @@ public class SenderViewHolder extends RecyclerView.ViewHolder {
 
     private void loadViews() {
         senderNameTextView = (TextView) itemView.findViewById(R.id.senderNameTextView);
+        senderNumberTextView = (TextView) itemView.findViewById(R.id.senderNumberTextView);
         senderNumberOfSendingTextView = (TextView) itemView.findViewById(R.id.senderNumberOfSendingTextView);
     }
 
     public void setUpData(Sender sender){
         senderNameTextView.setText(sender.getName());
+        senderNumberTextView.setText(sender.getNumber());
         senderNumberOfSendingTextView.setText(String.valueOf(sender.getNumberOfSending()));
     }
 
