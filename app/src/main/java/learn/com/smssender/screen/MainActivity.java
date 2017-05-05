@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -15,6 +17,8 @@ import learn.com.smssender.screen.controller.MainController;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView sendersRecyclerView;
+    private TextView emptyTextView;
+    private ProgressBar progressBar;
     private SendersAdapter sendersAdapter;
     private MainController controller;
 
@@ -34,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadViews() {
         sendersRecyclerView = (RecyclerView) findViewById(R.id.sendersRecyclerView);
+        emptyTextView = (TextView) findViewById(R.id.emptyTextView);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     public void configureRecyclerView(List<Sender> senders){
@@ -42,4 +48,15 @@ public class MainActivity extends AppCompatActivity {
         sendersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    public TextView getEmptyTextView() {
+        return emptyTextView;
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public SendersAdapter getSendersAdapter() {
+        return sendersAdapter;
+    }
 }

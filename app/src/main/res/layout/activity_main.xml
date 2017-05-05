@@ -9,9 +9,23 @@
     android:paddingTop="@dimen/margin_standard"
     tools:context=".screen.MainActivity">
 
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/progressbar_height"
+        android:id="@+id/progressBar"/>
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/sendersRecyclerView"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyTextView"
+        android:text="@string/empty"/>
 
 </RelativeLayout>

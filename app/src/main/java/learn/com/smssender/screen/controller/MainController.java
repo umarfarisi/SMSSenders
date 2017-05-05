@@ -13,6 +13,7 @@ import learn.com.smssender.screen.MainActivity;
 public class MainController {
 
     private MainActivity activity;
+    private List<Sender> data;
 
     public MainController(MainActivity activity) {
         this.activity = activity;
@@ -20,10 +21,10 @@ public class MainController {
     }
 
     private void loadDataForFirstTime() {
-        List<Sender> senders = new ArrayList<>();
+        data = new ArrayList<>();
         for(int i = 50 ; i > 0 ; i--){
-            senders.add(new Sender("Nama "+i,i));
+            data.add(new Sender("Nama "+i,i));
         }
-        activity.configureRecyclerView(senders);
+        activity.configureRecyclerView(data);
     }
 }
