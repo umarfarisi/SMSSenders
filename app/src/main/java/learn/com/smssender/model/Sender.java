@@ -7,10 +7,12 @@ package learn.com.smssender.model;
 public class Sender {
 
     private String name;
+    private String number;
     private int numberOfSending;
 
-    public Sender(String name, int numberOfSending) {
+    public Sender(String name, String number, int numberOfSending) {
         this.name = name;
+        this.number = number;
         this.numberOfSending = numberOfSending;
     }
 
@@ -20,6 +22,14 @@ public class Sender {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public int getNumberOfSending() {
@@ -37,19 +47,20 @@ public class Sender {
 
         Sender sender = (Sender) o;
 
-        return name.equals(sender.name);
+        return number.equals(sender.number);
 
     }
 
     @Override
     public int hashCode() {
-        return name.hashCode();
+        return number.hashCode();
     }
 
     @Override
     public String toString() {
         return "Sender{" +
                 "name='" + name + '\'' +
+                ", number='" + number + '\'' +
                 ", numberOfSending=" + numberOfSending +
                 '}';
     }

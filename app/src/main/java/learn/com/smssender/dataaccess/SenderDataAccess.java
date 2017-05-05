@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,9 +23,10 @@ import learn.com.smssender.utils.GlobalVariable;
 public class SenderDataAccess {
     public void getAllSenders(SenderDACallBack<List<Sender>> getAllSendersCallback){
 
-        ContentResolver smsContentResolver = GlobalVariable.APPLICATION_CONTEXT.getContentResolver();
+        ContentResolver connResolver = GlobalVariable.APPLICATION_CONTEXT.getContentResolver();
+
         Uri smsUri = Uri.parse("content://sms/inbox");
-        Cursor smsCursor = smsContentResolver.query(smsUri,new String[]{"_id","address"},null,null,null);
+        Cursor smsCursor = connResolver.query(smsUri,new String[]{"_id","address"},null,null,null);
 
         Map<String, Integer> smsData = new HashMap<>();
 
@@ -37,10 +39,19 @@ public class SenderDataAccess {
             }
         }
 
+        Uri contactUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+
         List<Sender> data = new ArrayList<>();
 
         for(Map.Entry<String, Integer> smsDatum: smsData.entrySet()){
-            data.add(new Sender(smsDatum.getKey(),smsDatum.getValue()));
+            Cursor contactCursor = connResolver.query(contactUri
+                    ,new String[]{ContactsContract.Contacts.DISPLAY_NAME}
+                    ,ContactsContract.CommonDataKinds.Phone.NUMBER +" = ?"
+                    ,new String[]{smsDatum.getKey()},null);
+            if(contactCursor.moveToNext()){
+                data.add(new Sender(contactCursor.getString(0),smsDatum.getKey(),smsDatum.getValue()));
+            }
+
         }
 
         getAllSendersCallback.onSuccess(data);
