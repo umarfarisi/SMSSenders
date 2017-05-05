@@ -50,6 +50,8 @@ public class SenderDataAccess {
                     ,new String[]{smsDatum.getKey()},null);
             if(contactCursor.moveToNext()){
                 data.add(new Sender(contactCursor.getString(0),smsDatum.getKey(),smsDatum.getValue()));
+            }else{
+                data.add(new Sender(smsDatum.getKey(),smsDatum.getKey(),smsDatum.getValue()));
             }
 
         }
