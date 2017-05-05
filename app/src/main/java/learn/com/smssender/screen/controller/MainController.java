@@ -3,6 +3,8 @@ package learn.com.smssender.screen.controller;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import learn.com.smssender.dataaccess.SenderDataAccess;
@@ -30,6 +32,12 @@ public class MainController{
         dataAccess.getAllSenders(new SenderDACallBack<List<Sender>>() {
             @Override
             public void onSuccess(List<Sender> data) {
+                Collections.sort(data, new Comparator<Sender>() {
+                    @Override
+                    public int compare(Sender sender1, Sender sender2) {
+                        return sender2.getNumberOfSending() - sender1.getNumberOfSending();
+                    }
+                });
                 MainController.this.data = data;
                 activity.configureRecyclerView(data);
             }
