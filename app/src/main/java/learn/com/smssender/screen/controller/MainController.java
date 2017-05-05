@@ -1,5 +1,6 @@
 package learn.com.smssender.screen.controller;
 
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,21 +30,29 @@ public class MainController{
     }
 
     private void loadDataForFirstTime() {
+        activity.getProgressBar().setVisibility(View.VISIBLE);
         dataAccess.getAllSenders(new SenderDACallBack<List<Sender>>() {
             @Override
             public void onSuccess(List<Sender> data) {
-                Collections.sort(data, new Comparator<Sender>() {
-                    @Override
-                    public int compare(Sender sender1, Sender sender2) {
-                        return sender2.getNumberOfSending() - sender1.getNumberOfSending();
-                    }
-                });
+                activity.getProgressBar().setVisibility(View.GONE);
                 MainController.this.data = data;
+                if(!data.isEmpty()) {
+                    Collections.sort(data, new Comparator<Sender>() {
+                        @Override
+                        public int compare(Sender sender1, Sender sender2) {
+                            return sender2.getNumberOfSending() - sender1.getNumberOfSending();
+                        }
+                    });
+                    activity.getEmptyTextView().setVisibility(View.GONE);
+                }else{
+                    activity.getEmptyTextView().setVisibility(View.VISIBLE);
+                }
                 activity.configureRecyclerView(data);
             }
 
             @Override
             public void onError(String message) {
+                activity.getProgressBar().setVisibility(View.GONE);
                 Toast.makeText(activity,"Error: "+message,Toast.LENGTH_SHORT).show();
             }
         });
