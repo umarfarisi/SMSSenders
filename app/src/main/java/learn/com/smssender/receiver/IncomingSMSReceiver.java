@@ -5,7 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.SmsMessage;
-import android.util.Log;
+
+import org.greenrobot.eventbus.EventBus;
+
+import learn.com.smssender.receiver.event.IncomingSMSEvent;
 
 /**
  * @author Muhammad Umar Farisi
@@ -16,27 +19,19 @@ public class IncomingSMSReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
+        Bundle bundle = intent.getExtras();
 
-        Log.d("MASUKKKKK","NOMOR: 11111111");
+        if (bundle != null) {
+            final Object[] pdus = (Object[]) bundle.get("pdus");
 
-        // Retrieves a map of extended data from the intent.
-        final Bundle bundle = intent.getExtras();
+            for (int i = 0; i < pdus.length; i++) {
 
-        try {
-            if (bundle != null) {
-                final Object[] pdus = (Object[]) bundle.get("pdus");
+                SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
+                String senderNumber = currentMessage.getDisplayOriginatingAddress();
 
-                for (int i = 0; i < pdus.length; i++) {
+                EventBus.getDefault().post(new IncomingSMSEvent(senderNumber));
 
-                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdus[i]);
-                    String senderNumber = currentMessage.getDisplayOriginatingAddress();
-
-                    Log.d("MASUKKKKK","NOMOR: "+senderNumber);
-
-                }
             }
-        } catch (Exception e) {
-            Log.d("MASUKKKKK","ERRROR "+e.getMessage());
         }
     }
 

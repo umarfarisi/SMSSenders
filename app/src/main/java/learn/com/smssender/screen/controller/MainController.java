@@ -3,6 +3,10 @@ package learn.com.smssender.screen.controller;
 import android.view.View;
 import android.widget.Toast;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -10,6 +14,7 @@ import java.util.List;
 import learn.com.smssender.dataaccess.SenderDataAccess;
 import learn.com.smssender.dataaccess.callback.SenderDACallBack;
 import learn.com.smssender.model.Sender;
+import learn.com.smssender.receiver.event.IncomingSMSEvent;
 import learn.com.smssender.screen.MainActivity;
 
 /**
@@ -26,6 +31,7 @@ public class MainController{
         this.activity = activity;
         this.dataAccess = new SenderDataAccess();
         loadDataForFirstTime();
+        EventBus.getDefault().register(this);
     }
 
     private void loadDataForFirstTime() {
@@ -57,6 +63,19 @@ public class MainController{
         });
     }
 
+    public void onDestroy(){
+        EventBus.getDefault().unregister(this);
+    }
 
+    @Subscribe (threadMode = ThreadMode.MAIN)
+    public void onIncomingSMS(IncomingSMSEvent event){
+        if(data.contains(new Sender(event.getSenderNumber(),event.getSenderNumber(),1))){
+            Sender currentSender = data.get(data.indexOf(new Sender(null,event.getSenderNumber(),-1)));
+            currentSender.setNumberOfSending(currentSender.getNumberOfSending()+1);
+        }else{
+            data.add(new Sender(event.getSenderNumber(),event.getSenderNumber(),1));
+        }
+        activity.getSendersAdapter().notifyDataSetChanged();
+    }
 
 }

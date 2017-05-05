@@ -32,6 +32,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        controller.onDestroy();
+    }
+
     private void setUpDefaultValue() {
         controller = new MainController(this);
     }
