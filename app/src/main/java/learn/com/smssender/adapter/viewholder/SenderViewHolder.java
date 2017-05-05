@@ -28,7 +28,7 @@ public class SenderViewHolder extends RecyclerView.ViewHolder {
 
     public void setUpData(Sender sender){
         senderNameTextView.setText(sender.getName());
-        senderNumberOfSendingTextView.setText(sender.getNumberOfSending());
+        senderNumberOfSendingTextView.setText(String.valueOf(sender.getNumberOfSending()));
     }
 
 }
