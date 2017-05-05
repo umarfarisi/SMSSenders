@@ -26,16 +26,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         loadViews();
         setUpDefaultValue();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(isControllerNotNull()){
+            controller.loadData();
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        controller.onDestroy();
+        if(isControllerNotNull()){
+            controller.onDestroy();
+        }
     }
 
     private void setUpDefaultValue() {
@@ -65,4 +73,9 @@ public class MainActivity extends AppCompatActivity {
     public SendersAdapter getSendersAdapter() {
         return sendersAdapter;
     }
+
+    private boolean isControllerNotNull() {
+        return controller != null;
+    }
+
 }

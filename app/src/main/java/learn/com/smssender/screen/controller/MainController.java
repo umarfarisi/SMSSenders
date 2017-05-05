@@ -30,11 +30,10 @@ public class MainController{
     public MainController(MainActivity activity) {
         this.activity = activity;
         this.dataAccess = new SenderDataAccess();
-        loadDataForFirstTime();
         EventBus.getDefault().register(this);
     }
 
-    private void loadDataForFirstTime() {
+    public void loadData() {
         activity.getProgressBar().setVisibility(View.VISIBLE);
         dataAccess.getAllSenders(new SenderDACallBack<List<Sender>>() {
             @Override
