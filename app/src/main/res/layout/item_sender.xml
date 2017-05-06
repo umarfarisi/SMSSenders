@@ -10,26 +10,50 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textStyle="bold"
+            android:textAppearance="?android:textAppearanceMedium"
             android:layout_marginTop="@dimen/margin_standard"
             android:layout_marginLeft="@dimen/margin_standard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/senderNameTextView"
             android:text="Muhammad Umar Farisi"/>
-        <TextView
-            android:layout_below="@+id/senderNameTextView"
+
+        <View
             android:layout_margin="@dimen/margin_standard"
+            android:background="@android:color/darker_gray"
+            android:layout_toLeftOf="@+id/senderNumberOfSendingTextView"
+            android:layout_below="@+id/senderNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="01dp"
+            android:id="@+id/dividerView"/>
+
+        <TextView
+            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_marginLeft="@dimen/margin_standard"
+            android:layout_below="@+id/dividerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/senderNumberTextView"
             android:text="085777799054"/>
         <TextView
+            android:layout_marginLeft="@dimen/margin_standard"
+            android:layout_toLeftOf="@+id/messageTextView"
+            android:textAppearance="?android:textAppearanceLarge"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/margin_standard"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/senderNumberOfSendingTextView"
             android:text="500"/>
+        <TextView
+            android:layout_marginLeft="@dimen/margin_short"
+            android:layout_marginRight="@dimen/margin_standard"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/messageTextView"
+            android:text="@string/sms"/>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

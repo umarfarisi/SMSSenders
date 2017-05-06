@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SMSSender</string>
     <string name="empty">no sender found....</string>
+    <string name="sms">sms</string>
 </resources>
