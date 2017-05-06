@@ -52,6 +52,7 @@ public class MainController{
                     activity.getEmptyTextView().setVisibility(View.VISIBLE);
                 }
                 activity.getSendersAdapter().setUpData(data);
+                activity.getSendersAdapter().notifyDataSetChanged();
             }
 
             @Override
