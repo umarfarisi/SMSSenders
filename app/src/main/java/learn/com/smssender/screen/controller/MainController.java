@@ -34,7 +34,6 @@ public class MainController{
     }
 
     public void loadData() {
-        activity.getSendersRecyclerView().setVisibility(View.GONE);
         activity.getProgressBar().setVisibility(View.VISIBLE);
         dataAccess.getAllSenders(new SenderDACallBack<List<Sender>>() {
             @Override
@@ -53,13 +52,11 @@ public class MainController{
                     activity.getEmptyTextView().setVisibility(View.VISIBLE);
                 }
                 activity.getSendersAdapter().setUpData(data);
-                activity.getSendersRecyclerView().setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onError(String message) {
                 activity.getProgressBar().setVisibility(View.GONE);
-                activity.getSendersRecyclerView().setVisibility(View.VISIBLE);
                 Toast.makeText(activity,"Error: "+message,Toast.LENGTH_SHORT).show();
             }
         });

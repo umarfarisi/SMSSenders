@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import learn.com.smssender.R;
@@ -22,6 +23,7 @@ public class SendersAdapter extends RecyclerView.Adapter<SenderViewHolder> {
 
     public SendersAdapter(Context context) {
         this.context = context;
+        this.senders = new ArrayList<>();
     }
 
     public void setUpData(List<Sender> senders){

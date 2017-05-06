@@ -3,25 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/margin_standard"
-    android:paddingLeft="@dimen/margin_standard"
-    android:paddingRight="@dimen/margin_standard"
-    android:paddingTop="@dimen/margin_standard"
     tools:context=".screen.MainActivity">
 
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_alignParentTop="true"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_centerInParent="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:indeterminate="true"/>
+
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/progressBar"
+        android:paddingBottom="@dimen/margin_standard"
+        android:paddingLeft="@dimen/margin_standard"
+        android:paddingRight="@dimen/margin_standard"
+        android:paddingTop="@dimen/margin_standard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/sendersRecyclerView"/>
 
-    <ProgressBar
-        android:visibility="gone"
-        android:layout_centerInParent="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"/>
-
     <TextView
+        android:layout_below="@id/progressBar"
         android:visibility="gone"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"

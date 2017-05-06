@@ -71,10 +71,6 @@ public class MainActivity extends AppCompatActivity {
         return sendersAdapter;
     }
 
-    public RecyclerView getSendersRecyclerView() {
-        return sendersRecyclerView;
-    }
-
     private boolean isControllerNotNull() {
         return controller != null;
     }
