@@ -1,4 +1,4 @@
-package learn.com.smssender.receiver;
+package learn.com.smssender.presenter.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,7 +8,7 @@ import android.telephony.SmsMessage;
 
 import org.greenrobot.eventbus.EventBus;
 
-import learn.com.smssender.receiver.event.IncomingSMSEvent;
+import learn.com.smssender.presenter.receiver.event.IncomingSMSEvent;
 
 /**
  * @author Muhammad Umar Farisi

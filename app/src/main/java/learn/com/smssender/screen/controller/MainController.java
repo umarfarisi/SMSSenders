@@ -11,10 +11,10 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import learn.com.smssender.dataaccess.SenderDataAccess;
-import learn.com.smssender.dataaccess.callback.SenderDACallBack;
+import learn.com.smssender.presenter.dataaccess.SenderDataAccess;
+import learn.com.smssender.presenter.dataaccess.callback.SenderDACallBack;
 import learn.com.smssender.model.Sender;
-import learn.com.smssender.receiver.event.IncomingSMSEvent;
+import learn.com.smssender.presenter.receiver.event.IncomingSMSEvent;
 import learn.com.smssender.screen.MainActivity;
 
 /**

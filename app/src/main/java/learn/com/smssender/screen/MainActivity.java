@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import learn.com.smssender.R;
-import learn.com.smssender.adapter.SendersAdapter;
+import learn.com.smssender.support.adapter.SendersAdapter;
 import learn.com.smssender.model.Sender;
 import learn.com.smssender.screen.controller.MainController;
 

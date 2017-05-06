@@ -1,4 +1,4 @@
-package learn.com.smssender.dataaccess.callback;
+package learn.com.smssender.presenter.dataaccess.callback;
 
 /**
  * @author Muhammad Umar Farisi

@@ -1,4 +1,4 @@
-package learn.com.smssender.utils;
+package learn.com.smssender.support.utils;
 
 import android.content.Context;
 

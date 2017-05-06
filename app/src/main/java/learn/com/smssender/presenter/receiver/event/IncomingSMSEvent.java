@@ -1,4 +1,4 @@
-package learn.com.smssender.receiver.event;
+package learn.com.smssender.presenter.receiver.event;
 
 /**
  * @author Muhammad Umar Farisi

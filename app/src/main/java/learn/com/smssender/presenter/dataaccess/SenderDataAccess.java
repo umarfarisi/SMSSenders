@@ -1,4 +1,4 @@
-package learn.com.smssender.dataaccess;
+package learn.com.smssender.presenter.dataaccess;
 
 import android.content.ContentResolver;
 import android.database.Cursor;
@@ -11,9 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import learn.com.smssender.dataaccess.callback.SenderDACallBack;
+import learn.com.smssender.presenter.dataaccess.callback.SenderDACallBack;
 import learn.com.smssender.model.Sender;
-import learn.com.smssender.utils.GlobalVariable;
+import learn.com.smssender.support.utils.GlobalVariable;
 
 /**
  * @author Muhammad Umar Farisi

@@ -1,4 +1,4 @@
-package learn.com.smssender.adapter;
+package learn.com.smssender.support.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import java.util.List;
 
 import learn.com.smssender.R;
-import learn.com.smssender.adapter.viewholder.SenderViewHolder;
+import learn.com.smssender.support.adapter.viewholder.SenderViewHolder;
 import learn.com.smssender.model.Sender;
 
 /**

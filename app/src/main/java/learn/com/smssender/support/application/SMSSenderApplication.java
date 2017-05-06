@@ -1,8 +1,8 @@
-package learn.com.smssender.application;
+package learn.com.smssender.support.application;
 
 import android.app.Application;
 
-import learn.com.smssender.utils.GlobalVariable;
+import learn.com.smssender.support.utils.GlobalVariable;
 
 /**
  * @author Muhammad Umar Farisi
