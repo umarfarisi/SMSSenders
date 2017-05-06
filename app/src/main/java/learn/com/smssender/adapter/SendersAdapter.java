@@ -37,6 +37,9 @@ public class SendersAdapter extends RecyclerView.Adapter<SenderViewHolder> {
 
     @Override
     public int getItemCount() {
-        return senders.size();
+        if(senders.size() < 10){
+            return senders.size();
+        }
+        return 10;
     }
 }
