@@ -57,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         sendersAdapter = new SendersAdapter(this);
         sendersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         sendersRecyclerView.setAdapter(sendersAdapter);
+        progressBar.getIndeterminateDrawable().setColorFilter(
+                getResources().getColor(R.color.colorPrimaryDark),
+                android.graphics.PorterDuff.Mode.SRC_IN);
     }
 
     public TextView getEmptyTextView() {
