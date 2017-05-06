@@ -20,8 +20,11 @@ public class SendersAdapter extends RecyclerView.Adapter<SenderViewHolder> {
     private Context context;
     private List<Sender> senders;
 
-    public SendersAdapter(Context context, List<Sender> senders) {
+    public SendersAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setUpData(List<Sender> senders){
         this.senders = senders;
     }
 

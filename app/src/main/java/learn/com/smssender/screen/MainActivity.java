@@ -46,20 +46,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setUpDefaultValue() {
-        controller = new MainController(this);
-    }
-
     private void loadViews() {
         sendersRecyclerView = (RecyclerView) findViewById(R.id.sendersRecyclerView);
         emptyTextView = (TextView) findViewById(R.id.emptyTextView);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
-    public void configureRecyclerView(List<Sender> senders){
-        sendersAdapter = new SendersAdapter(this,senders);
-        sendersRecyclerView.setAdapter(sendersAdapter);
+    private void setUpDefaultValue() {
+        controller = new MainController(this);
+        sendersAdapter = new SendersAdapter(this);
         sendersRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        sendersRecyclerView.setAdapter(sendersAdapter);
     }
 
     public TextView getEmptyTextView() {
@@ -72,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
 
     public SendersAdapter getSendersAdapter() {
         return sendersAdapter;
+    }
+
+    public RecyclerView getSendersRecyclerView() {
+        return sendersRecyclerView;
     }
 
     private boolean isControllerNotNull() {
