@@ -13,6 +13,7 @@ import java.util.Map;
 
 import learn.com.smssender.presenter.dataaccess.callback.SenderDACallBack;
 import learn.com.smssender.model.Sender;
+import learn.com.smssender.support.utils.ContentProviderUtils;
 import learn.com.smssender.support.utils.GlobalVariable;
 
 /**
@@ -35,11 +36,9 @@ public class SenderDataAccess {
             @Override
             protected List<Sender> doInBackground(Void... params) {
 
-                Uri smsUri = Uri.parse("content://sms/inbox");
-                Cursor smsCursor = resolver.query(smsUri,new String[]{"_id","address"},null,null,null);
+                Cursor smsCursor = ContentProviderUtils.getSMSInbox(resolver);
 
                 Map<String, Integer> smsData = new HashMap<>();
-
                 while(smsCursor.moveToNext()){
                     String senderName = smsCursor.getString(1);
                     if(smsData.containsKey(senderName)){
@@ -49,15 +48,10 @@ public class SenderDataAccess {
                     }
                 }
 
-                Uri contactUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-
                 List<Sender> senders = new ArrayList<>();
 
                 for(Map.Entry<String, Integer> smsDatum: smsData.entrySet()){
-                    Cursor contactCursor = resolver.query(contactUri
-                            ,new String[]{ContactsContract.Contacts.DISPLAY_NAME}
-                            ,ContactsContract.CommonDataKinds.Phone.NUMBER +" = ?"
-                            ,new String[]{smsDatum.getKey()},null);
+                    Cursor contactCursor = ContentProviderUtils.getContactInfo(resolver,smsDatum.getKey());
                     if(contactCursor.moveToNext()){
                         senders.add(new Sender(contactCursor.getString(0),smsDatum.getKey(),smsDatum.getValue()));
                     }else{
