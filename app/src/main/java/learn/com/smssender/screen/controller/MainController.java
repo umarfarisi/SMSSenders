@@ -2,10 +2,8 @@ package learn.com.smssender.screen.controller;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,9 +15,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import learn.com.smssender.model.Sender;
 import learn.com.smssender.presenter.dataaccess.SenderDataAccess;
 import learn.com.smssender.presenter.dataaccess.callback.SenderDACallBack;
-import learn.com.smssender.model.Sender;
 import learn.com.smssender.presenter.receiver.event.IncomingSMSEvent;
 import learn.com.smssender.screen.MainActivity;
 
@@ -72,10 +70,9 @@ public class MainController{
     }
 
     public void onStart() {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
-                (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED ||
-                        ContextCompat.checkSelfPermission(activity, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED ||
-                        ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)) {
+        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(activity, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity, new String[]{
                     Manifest.permission.READ_SMS,
                     Manifest.permission.RECEIVE_SMS,
@@ -92,10 +89,13 @@ public class MainController{
 
     public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
         if(requestCode == REQ_ALL_PERMISSION){
-            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            if(grantResults.length == 3 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[2] == PackageManager.PERMISSION_GRANTED ){
                 loadData();
             }else{
-                Toast.makeText(activity,"Can't show data, because permissions don't garemted",Toast.LENGTH_LONG).show();
+                activity.getEmptyTextView().setVisibility(View.VISIBLE);
+                Toast.makeText(activity,"Data can't be displayed because not all permissions be garant",Toast.LENGTH_LONG).show();
             }
         }
     }
