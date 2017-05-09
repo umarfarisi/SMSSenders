@@ -1,18 +1,17 @@
 package learn.com.smssender.screen;
 
-import android.support.v7.app.AppCompatActivity;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.util.List;
-
 import learn.com.smssender.R;
-import learn.com.smssender.support.adapter.SendersAdapter;
-import learn.com.smssender.model.Sender;
 import learn.com.smssender.screen.controller.MainController;
+import learn.com.smssender.support.adapter.SendersAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(isControllerNotNull()){
-            controller.loadData();
+            controller.onStart();
         }
     }
 
@@ -43,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         if(isControllerNotNull()){
             controller.onDestroy();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode
+            , @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(isControllerNotNull()){
+            controller.onRequestPermissionResult(requestCode, permissions, grantResults);
         }
     }
 

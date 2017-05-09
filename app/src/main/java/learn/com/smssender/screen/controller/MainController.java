@@ -1,5 +1,9 @@
 package learn.com.smssender.screen.controller;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
@@ -22,6 +26,8 @@ import learn.com.smssender.screen.MainActivity;
  * @created 05/05/2017
  */
 public class MainController{
+
+    private static final int REQ_ALL_PERMISSION = 1;
 
     private MainActivity activity;
     private List<Sender> data;
@@ -63,8 +69,30 @@ public class MainController{
         });
     }
 
+    public void onStart() {
+        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(activity, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(activity,new String[]{
+                    Manifest.permission.READ_SMS,
+                    Manifest.permission.RECEIVE_SMS,
+                    Manifest.permission.READ_CONTACTS
+            },REQ_ALL_PERMISSION );
+        }
+    }
+
     public void onDestroy(){
         EventBus.getDefault().unregister(this);
+    }
+
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) {
+        if(requestCode == REQ_ALL_PERMISSION){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                loadData();
+            }else{
+                Toast.makeText(activity,"Can't show data, because permissions don't garemted",Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
     @Subscribe (threadMode = ThreadMode.MAIN)
