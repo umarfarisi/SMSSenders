@@ -7,6 +7,8 @@ import android.os.AsyncTask;
 import android.provider.ContactsContract;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +61,14 @@ public class SenderDataAccess {
                     }
 
                 }
+
+                Collections.sort(senders, new Comparator<Sender>() {
+                    @Override
+                    public int compare(Sender sender1, Sender sender2) {
+                        return sender2.getNumberOfSending() - sender1.getNumberOfSending();
+                    }
+                });
+
                 return senders;
             }
 
