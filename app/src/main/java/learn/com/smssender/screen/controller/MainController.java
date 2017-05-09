@@ -2,8 +2,10 @@ package learn.com.smssender.screen.controller;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -70,14 +72,17 @@ public class MainController{
     }
 
     public void onStart() {
-        if(ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(activity, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity,new String[]{
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M &&
+                (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED ||
+                        ContextCompat.checkSelfPermission(activity, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED ||
+                        ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED)) {
+            ActivityCompat.requestPermissions(activity, new String[]{
                     Manifest.permission.READ_SMS,
                     Manifest.permission.RECEIVE_SMS,
                     Manifest.permission.READ_CONTACTS
-            },REQ_ALL_PERMISSION );
+            }, REQ_ALL_PERMISSION);
+        }else{
+            loadData();
         }
     }
 
