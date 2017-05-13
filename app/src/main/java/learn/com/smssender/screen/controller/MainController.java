@@ -106,6 +106,7 @@ public class MainController{
             Sender currentSender = data.get(data.indexOf(new Sender(null,event.getSenderNumber(),-1)));
             currentSender.setNumberOfSending(currentSender.getNumberOfSending()+1);
         }else{
+            if(data.isEmpty())activity.getEmptyTextView().setVisibility(View.GONE);
             data.add(new Sender(event.getSenderNumber(),event.getSenderNumber(),1));
         }
         activity.getSendersAdapter().notifyDataSetChanged();
